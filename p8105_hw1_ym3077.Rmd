@@ -49,5 +49,37 @@ ggsave("weather_plot.png", plot = weather_plot, height = 4, width = 6)
 
 ## Problem 2
 
+Create dataframe:
+```{r}
+hw1_df = tibble(
+  random_sample = rnorm(10),
+  vec_logical = rnorm(10) > 0,
+  vec_character = c("Here", "is", "my", "data", "science", "one", "home", "work", "one", "answer"),
+  vec_factor = factor(sample(c("A", "B", "C"), size = 10, replace = TRUE))
+)
+hw1_df
+```
 
+Take the mean of each variable:
+```{r}
+mean(hw1_df$random_sample)     
+mean(hw1_df$vec_logical)        
+mean(hw1_df$vec_character)
+mean(hw1_df$vec_factor) 
+```
+We can take mean for the random sample and the logic vector, but not for character vector or factor factor. 
+
+Convert to numeric:
+```{r, echo = TRUE, results = 'hide'}
+as.numeric(hw1_df$vec_logical)
+as.numeric(hw1_df$vec_character)
+as.numeric(hw1_df$vec_factor)
+```
+The **logical vector** is coerced to `1`s and `0`s, where `TRUE` becomes `1`, `FALSE` becomes `0`. This explains why taking the mean of a logical vector works: it returns the proportion of TRUE values.
+
+The **character vector** cannot be meaningfully coerced to numbers. R returns all `NA`s with a warning. This explains why `mean()` fails for character data — it’s not numeric.
+
+The **factor vector** is coerced to its underlying integer levels, based on the order of factor levels (e.g., "A" = 1, "B" = 2, "C" = 3 by default). This gives numeric values, and explains why `mean()` success. 
+
+So, this coercion behavior helps explain which variables can be averaged using `mean()`, and why others cannot with errors.
 
