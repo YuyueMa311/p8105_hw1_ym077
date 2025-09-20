@@ -3,5 +3,50 @@ title: "p8105_hw1_ym3077"
 output: github_document
 ---
 
+## Problem 1
+
+Load the libraries and dataset:
+```{r}
+library(tidyverse)
+library(moderndive)
+
+data("early_january_weather")
+
+```
+
+Dataset Description:
+```{r}
+names(early_january_weather)
+early_january_weather
+
+nrow(early_january_weather)
+ncol(early_january_weather)
+
+mean_temp = mean(early_january_weather$temp)
+mean_temp
+```
+The `early_january_weather` dataset contains variable: `r names(early_january_weather)`; and has `r nrow(early_january_weather)` rows and `r ncol(early_january_weather)` columns.
+
+The mean temperature is `r mean(early_january_weather$temp)` °F.
+
+
+Make Scatterplot:
+```{r}
+weather_plot = ggplot(early_january_weather, aes(x = time_hour, y = temp, 
+                                                 color = humid)) + geom_point()
+weather_plot
+```
+
+This weather scatterplot shows how temperature fluctuates every day, and there is an independent pattern of humidity, as low humidity periods occuring at both cold and warm temperature. 
+
+
+Export the scatterplot:
+```{r}
+ggsave("weather_plot.png", plot = weather_plot, height = 4, width = 6)
+```
+
+
+
+
 
 
