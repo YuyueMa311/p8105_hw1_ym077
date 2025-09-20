@@ -47,6 +47,7 @@ ggsave("weather_plot.png", plot = weather_plot, height = 4, width = 6)
 
 
 
+## Problem 2
 
 
 
